@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Abhiko Admin Dashboard",
+    "image": "/image/demo.png",
+    "price": 299,
+    "oldPrice": 599,
+    "slug": "abhiko-admin",
+    "shortDescription": "A futuristic admin panel built with Next.js and Tailwind.",
+    "description": "Abhiko Admin Dashboard is a fully responsive, dark-mode optimized dashboard built using modern technologies like Next.js, TypeScript, and Tailwind CSS. It offers elegant charts, tables, and reusable components tailored for fast development and beautiful UI.",
+    "previewLink": "https://abhiko.shop/preview/abhiko-admin",
+    "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Chart.js"],
+    "reviews": {
+      "rating": 4.8,
+      "count": 92
+    },
+    "downloads": 1045,
+    "lastUpdated": "2025-06-20"
+  },
+  {
+    "id": 2,
+    "title": "E-commerce UI Kit",
+    "image": "/image/demo.png",
+    "price": 199,
+    "oldPrice": 399,
+    "slug": "ecommerce-ui",
+    "shortDescription": "Complete UI pack for modern e-commerce stores.",
+    "description": "The E-commerce UI Kit includes essential UI components such as product cards, carts, filters, search, and checkout flows. It's designed for scalability and integrates seamlessly into any modern Next.js eCommerce platform.",
+    "previewLink": "https://abhiko.shop/preview/ecommerce-ui",
+    "techStack": ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
+    "reviews": {
+      "rating": 4.6,
+      "count": 74
+    },
+    "downloads": 870,
+    "lastUpdated": "2025-06-18"
+  },
+  {
+    "id": 3,
+    "title": "Portfolio Starter Kit",
+    "image": "/image/demo.png",
+    "price": 149,
+    "oldPrice": 299,
+    "slug": "portfolio-kit",
+    "shortDescription": "Modern portfolio template for devs and designers.",
+    "description": "The Portfolio Starter Kit is a sleek and responsive portfolio template built with developers in mind. It includes animated sections, project grids, testimonials, and contact forms. Ideal for showcasing your personal or freelance work.",
+    "previewLink": "https://abhiko.shop/preview/portfolio-kit",
+    "techStack": ["Next.js", "Tailwind CSS", "TypeScript", "GSAP"],
+    "reviews": {
+      "rating": 4.9,
+      "count": 110
+    },
+    "downloads": 1350,
+    "lastUpdated": "2025-06-22"
+  },
+  {
+    "id": 4,
+    "title": "Startup Landing Page",
+    "image": "/image/demo.png",
+    "price": 249,
+    "oldPrice": 499,
+    "slug": "startup-landing",
+    "shortDescription": "Conversion-optimized landing page for SaaS and startups.",
+    "description": "Startup Landing Page is crafted to drive conversions and highlight your product's key features. With built-in CTAs, testimonials, pricing sections, and responsive layouts, it's perfect for launching SaaS tools, mobile apps, or digital services.",
+    "previewLink": "https://abhiko.shop/preview/startup-landing",
+    "techStack": ["Next.js", "Tailwind CSS", "TypeScript", "ShadCN UI"],
+    "reviews": {
+      "rating": 4.7,
+      "count": 88
+    },
+    "downloads": 980,
+    "lastUpdated": "2025-06-25"
+  },
+  {
+    "id": 5,
+    "title": "Startup Landing Page",
+    "image": "/image/demo.png",
+    "price": 249,
+    "oldPrice": 499,
+    "slug": "startup-landing",
+    "shortDescription": "Conversion-optimized landing page for SaaS and startups.",
+    "description": "Startup Landing Page is crafted to drive conversions and highlight your product's key features. With built-in CTAs, testimonials, pricing sections, and responsive layouts, it's perfect for launching SaaS tools, mobile apps, or digital services.",
+    "previewLink": "https://abhiko.shop/preview/startup-landing",
+    "techStack": ["Next.js", "Tailwind CSS", "TypeScript", "ShadCN UI"],
+    "reviews": {
+      "rating": 4.7,
+      "count": 88
+    },
+    "downloads": 980,
+    "lastUpdated": "2025-06-25"
+  }
+]
