@@ -8,8 +8,8 @@ export function requireAuth(handler: NextApiHandler) {
     if (!token) return res.status(401).json({ error: 'Unauthorized' });
 
     const decoded = verifyToken(token);
-    if (!decoded) return res.status(401).json({ error: 'Invalid or expired token' });
-
+    if (!decoded) return res.status(401).json({ error: 'Invalid or expired token..' });
+ 
     (req as any).user = decoded;
     return handler(req, res);
   };
