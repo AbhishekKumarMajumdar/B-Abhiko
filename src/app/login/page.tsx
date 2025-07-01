@@ -1,88 +1,97 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import { Github, Mail, Lock, LogIn, User , Phone} from 'lucide-react';
+import { Github, Mail, Lock } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import api from '@/lib/axios';
 
 export default function LoginPage() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data } = await api.post('/auth/user/login', { email, password });
+
+      if (!data?.token) {
+        toast.error('Token missing in response');
+        return;
+      }
+
+      // 🍪 store token (7 days)
+      Cookies.set('auth_token', data.token, { expires: 7 });
+
+      toast.success('Login successful! Redirecting...');
+      setTimeout(() => (window.location.href = '/dashboard'), 1500);
+    } catch (err: any) {
+      const msg = err.response?.data?.error || 'Login failed';
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#060010] text-white flex items-center justify-center px-4">
       <div className="bg-[#0e0e12] border border-[#2a2a38] p-8 rounded-xl shadow-2xl max-w-md w-full space-y-6">
         <h1 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
-          {isSignUp ? 'Create Account' : 'Welcome Back'}
+          Login
         </h1>
 
-        <form className="space-y-4">
-          {isSignUp && (
-            <div className="flex items-center border border-[#2a2a38] rounded px-3 py-2 bg-[#1b1b23]">
-              <User className="w-4 h-4 text-gray-400 mr-2" />
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full bg-transparent text-white focus:outline-none text-sm"
-              />
-            </div>
-          )}
-          <div className="flex items-center border border-[#2a2a38] rounded px-3 py-2 bg-[#1b1b23]">
-            <Phone className="w-4 h-4 text-gray-400 mr-2" />
-            <input
-              type="Number"
-              placeholder="Mobile No."
-              className="w-full bg-transparent text-white focus:outline-none text-sm"
-            />
-          </div>
-          <div className="flex items-center border border-[#2a2a38] rounded px-3 py-2 bg-[#1b1b23]">
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="flex items-center bg-[#1b1b23] border border-[#2a2a38] rounded px-3 py-2">
             <Mail className="w-4 h-4 text-gray-400 mr-2" />
             <input
               type="email"
               placeholder="Email Address"
-              className="w-full bg-transparent text-white focus:outline-none text-sm"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full bg-transparent focus:outline-none text-sm"
             />
           </div>
-          <div className="flex items-center border border-[#2a2a38] rounded px-3 py-2 bg-[#1b1b23]">
+
+          <div className="flex items-center bg-[#1b1b23] border border-[#2a2a38] rounded px-3 py-2">
             <Lock className="w-4 h-4 text-gray-400 mr-2" />
             <input
               type="password"
               placeholder="Password"
-              className="w-full bg-transparent text-white focus:outline-none text-sm"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full bg-transparent focus:outline-none text-sm"
             />
           </div>
+
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-2 rounded font-semibold shadow-md hover:scale-[1.02] transition-all"
+            disabled={loading}
+            className="w-full py-2 rounded font-semibold shadow-md bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:scale-[1.02] transition-all"
           >
-            {isSignUp ? 'Sign Up' : 'Login'}
+            {loading ? 'Logging in…' : 'Login'}
           </button>
         </form>
 
-        <div className="text-center text-sm text-gray-400">
-          — Or continue with —
-        </div>
+        <p className="text-center text-sm text-gray-400">— Or continue with —</p>
 
         <div className="flex gap-4">
           <button
             onClick={() => signIn('google')}
-            className="flex-1 py-2 border border-[#2a2a38] bg-[#1b1b23] hover:bg-[#232333] text-sm rounded text-white shadow hover:shadow-md transition-all"
+            className="flex-1 py-2 bg-[#1b1b23] border border-[#2a2a38] rounded hover:bg-[#232333] text-sm shadow hover:shadow-md"
           >
-            <span className="mr-2"></span> Google
+            Google
           </button>
           <button
             onClick={() => signIn('github')}
-            className="flex-1 py-2 border border-[#2a2a38] bg-[#1b1b23] hover:bg-[#232333] text-sm rounded text-white shadow hover:shadow-md transition-all"
+            className="flex-1 py-2 bg-[#1b1b23] border border-[#2a2a38] rounded hover:bg-[#232333] text-sm shadow hover:shadow-md"
           >
             <Github className="inline w-4 h-4 mr-2" /> GitHub
-          </button>
-        </div>
-
-        <div className="text-center text-sm text-gray-400">
-          {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-          <button
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="text-blue-400 hover:underline"
-          >
-            {isSignUp ? 'Login' : 'Sign Up'}
           </button>
         </div>
       </div>

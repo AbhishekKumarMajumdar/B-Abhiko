@@ -1,10 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-   images: {
+  images: {
     domains: ['placehold.co'],
   },
-  /* config options here */
+
+  // ✅ Add this to enable middleware on specific routes
+  matcher: ['/login', '/dashboard/:path*'],
+
+  /* other config options can go here */
 };
 
 export default nextConfig;

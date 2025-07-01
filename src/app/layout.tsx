@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 import { Providers } from '@/lib/providers';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-
+import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -22,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar/>
           <main className="min-h-screen flex flex-col">{children}</main>
           <Footer/>
+             <Toaster position="top-center" />
         </Providers>
       </body>
     </html>

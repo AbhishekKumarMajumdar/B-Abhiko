@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Home, FileCode2, LogIn, Search } from 'lucide-react';
 import gsap from 'gsap';
+import Cookies from 'js-cookie';
 import projects from '@/data/projects.json';
 
 export const Navbar = () => {
@@ -14,7 +15,14 @@ export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<any[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const navRef = useRef(null);
+
+  useEffect(() => {
+    const token = Cookies.get('auth_token');
+    setIsLoggedIn(!!token);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -48,7 +56,9 @@ export const Navbar = () => {
   const navLinks = [
     { label: 'Home', href: '/', icon: <Home className="w-4 h-4" /> },
     { label: 'Projects', href: '/projects', icon: <FileCode2 className="w-4 h-4" /> },
-    { label: 'Login', href: '/login', icon: <LogIn className="w-4 h-4" /> },
+    isLoggedIn
+      ? { label: 'Dashboard', href: '/dashboard', icon: <Home className="w-4 h-4" /> }
+      : { label: 'Login', href: '/login', icon: <LogIn className="w-4 h-4" /> },
   ];
 
   const getLinkStyle = (href: string) =>
@@ -98,7 +108,9 @@ export const Navbar = () => {
             <Link
               key={href}
               href={href}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm ${getLinkStyle(href)}`}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm ${getLinkStyle(
+                href
+              )}`}
             >
               {icon}
               <span>{label}</span>
@@ -121,7 +133,9 @@ export const Navbar = () => {
               key={href}
               href={href}
               onClick={() => setMenuOpen(false)}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm ${getLinkStyle(href)}`}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm ${getLinkStyle(
+                href
+              )}`}
             >
               {icon}
               <span>{label}</span>

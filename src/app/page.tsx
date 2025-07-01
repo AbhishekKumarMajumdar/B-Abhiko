@@ -7,7 +7,6 @@ import { LatestProjectsSection } from "@/components/sections/latestProjects";
 import { ProjectShowcaseSection } from "@/components/sections/ProjectShowcaseSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import Image from "next/image";
-
 export default function Home() {
   return (
     <>
